@@ -1,0 +1,64 @@
+================================================================================
+ISSUE LOG — data_engineering_demo (append-only)
+================================================================================
+
+ISSUE-001 | 2026-05-09
+What went wrong: `assert r["is_unique"] is False` failed because DQ helpers returned
+numpy boolean scalars (`np.False_`), which do not satisfy `is False` identity checks.
+How to avoid: Cast structured flags to plain Python bool in API surfaces
+(`bool(dup == 0)`, `bool(not bad.any())`) so tests and JSON consumers behave
+predictably.
+
+ISSUE-002 | 2026-05-09
+What went wrong: PyArrow printed repeated `sysctlbyname` IOErrors when writing
+Parquet under a restricted macOS sandbox (harmless; writes still succeed).
+How to avoid: Ignore for normal dev; if noisy locally, run outside sandbox or
+switch bronze/silver/gold writers to CSV for a zero-native-extension path.
+
+ISSUE-003 | 2026-05-09
+What went wrong: `sqlite_seed.seed_source_sqlite` broke for `row_count < 100` because
+fixture anomalies used hard-coded row indices ≥ 90 (`IndexError` in orchestrator tests).
+How to avoid: Guard every seeded anomaly (`negative qty`, `bad amount`, duplicated
+`order_ref`) with `if index < row_count` so small smoke seeds stay valid.
+
+ISSUE-004 | 2026-05-09
+What went wrong: Relying on `pandas.DataFrame.to_sql(..., if_exists="replace")` alone
+implies implicit table typing and skips a reviewable DDL contract between SQLite
+source semantics and Postgres warehouse loads.
+How to avoid: Maintain explicit DDL (`postgres/init-warehouse.sql`,
+`de_demo/warehouse/schema.py`), create tables via `ensure_warehouse_tables`, then
+truncate + append loads inside one transaction (`postgres_sink.py`). If older
+pandas-only `CREATE TABLE` shapes linger, drop them once (`DROP TABLE
+silver_orders, gold_sku_summary`) before reloading.
+
+ISSUE-005 | 2026-05-09
+What went wrong: Guessing `localhost:5432` vs `5433` drifted from the repo’s actual
+Docker port mapping; connection hints were a behavioral workaround.
+How to avoid: Treat `docker-compose.yml` as the source of truth for `warehouse`
+`POSTGRES_*` and the host port bound to container `5432`; build the default
+`DATABASE_URL` from that file. Use `DATABASE_URL` only for non‑Compose deployments.
+
+ISSUE-006 | 2026-05-09
+What went wrong: When Postgres was down, `python -m de_demo` surfaced a deep
+SQLAlchemy/psycopg2 traceback even though the cause was unreachable TCP.
+How to avoid: Catch `OperationalError` in `de_demo/main.py`, print the resolved URL
+and short operator notes, exit 1 (no full stack trace).
+
+ISSUE-007 | 2026-05-09
+What went wrong: Users running Postgres locally (no Docker) expect the default JDBC/SQLAlchemy port **5432**; tying the client URL solely to Compose’s published **5433** broke local workflows.
+How to avoid: Parse user/db/password from `docker-compose.yml`, default **WAREHOUSE_HOST_PORT** to **5432**,
+and use **WAREHOUSE_HOST_PORT=5433** (or explicit `DATABASE_URL`) when attaching to Compose’s mapped port (`de_demo/config.py`).
+
+================================================================================
+How to run (live demo)
+================================================================================
+1. `cd data_engineering_demo && python3 -m venv .venv && source .venv/bin/activate`
+2. `pip install -e ".[dev]"`
+3. Warehouse: **local Postgres** on **5432** (bootstrap once:  
+   `python -m de_demo --bootstrap-instructions` → `postgres/bootstrap_local_roles.sql`).  
+   Docker Compose host port **5433**: `export WAREHOUSE_HOST_PORT=5433` or `DATABASE_URL`.
+4. Pipeline: `python -m de_demo --rows 100` requires that Postgres responds on the
+   configured port; `--skip-warehouse` skips the warehouse load only.
+5. Tests: `pytest`
+
+================================================================================

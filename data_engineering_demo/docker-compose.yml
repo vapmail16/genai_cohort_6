@@ -1,0 +1,15 @@
+services:
+  warehouse:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: dedemo
+      POSTGRES_PASSWORD: dedemo
+      POSTGRES_DB: dedemo_wh
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata_demo:/var/lib/postgresql/data
+      - ./postgres/init-warehouse.sql:/docker-entrypoint-initdb.d/01-init-warehouse.sql:ro
+
+volumes:
+  pgdata_demo:

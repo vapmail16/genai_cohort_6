@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Financial metrics — recommendations</title>
+    <style>
+      :root {
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          sans-serif;
+        color: #0f172a;
+        background: #f8fafc;
+      }
+      body {
+        margin: 0;
+        padding: 1rem 1.25rem 2rem;
+        max-width: 960px;
+        margin-inline: auto;
+      }
+      h1 {
+        font-size: 1.35rem;
+        margin: 0 0 0.25rem;
+      }
+      .muted {
+        color: #64748b;
+        font-size: 0.92rem;
+        margin: 0 0 1.25rem;
+      }
+      .layout {
+        display: grid;
+        gap: 1rem;
+      }
+      @media (min-width: 760px) {
+        .layout {
+          grid-template-columns: 2fr 1fr;
+          align-items: start;
+        }
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.875rem;
+        background: white;
+        box-shadow:
+          0 1px 2px rgb(15 23 42 / 0.06),
+          0 0 0 1px rgb(15 23 42 / 0.06);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      th,
+      td {
+        padding: 0.55rem 0.65rem;
+        text-align: left;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      th {
+        background: #f1f5f9;
+        font-weight: 600;
+      }
+      tr[data-selectable] {
+        cursor: pointer;
+      }
+      tr[data-selectable]:hover {
+        background: #f8fafc;
+      }
+      tr.selected {
+        background: #eff6ff;
+      }
+      .panel {
+        background: white;
+        border-radius: 8px;
+        padding: 0.9rem 1rem;
+        box-shadow:
+          0 1px 2px rgb(15 23 42 / 0.06),
+          0 0 0 1px rgb(15 23 42 / 0.06);
+        font-size: 0.9rem;
+      }
+      .panel h2 {
+        font-size: 1rem;
+        margin: 0 0 0.5rem;
+      }
+      .error {
+        color: #b91c1c;
+      }
+      .loading {
+        color: #64748b;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Financial analysis output</h1>
+    <p class="muted">
+      Select a metric row to evaluate recommendations (in-memory fixtures, no database).
+    </p>
+    <div class="layout">
+      <div>
+        <div id="table-root" class="loading">Loading metrics…</div>
+      </div>
+      <aside class="panel" id="detail-panel" aria-live="polite">
+        <h2>Recommendation</h2>
+        <p class="muted" id="detail-empty">
+          Choose a row to load the evaluation for that record.
+        </p>
+        <div id="detail-content" hidden></div>
+        <p class="error" id="detail-error" hidden></p>
+      </aside>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

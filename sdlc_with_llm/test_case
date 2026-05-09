@@ -1,0 +1,8 @@
+| Field           | Details                                                                                                                                                                                               |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Test Case ID    | TC-US3-001                                                                                                                                                                                            |
+| Scenario        | Portfolio Manager receives recommendations based on analysed financial metrics                                                                                                                        |
+| Preconditions   | Financial metrics have already been analysed by the system                                                                                                                                            |
+| Test Steps      | 1. User opens the financial analysis output.<br>2. User requests recommendations.<br>3. System generates recommendations based on analysed financial metrics.<br>4. User reviews the recommendations. |
+| Expected Result | The system displays clear recommendations based on the analysed financial information.                                                                                                                |
+| Test Type       | Success Scenario                                                                                                                                                                                      |

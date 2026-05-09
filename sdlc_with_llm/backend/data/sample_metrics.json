@@ -1,0 +1,47 @@
+[
+  {
+    "record_id": "SD-US3-001",
+    "user_role": "Portfolio Manager",
+    "portfolio_name": "UK Equity Income Portfolio",
+    "metric_name": "Revenue Growth",
+    "metric_value": "8.5%",
+    "metric_trend": "Increasing",
+    "analysis_finding": "Revenue growth has improved compared to the previous period."
+  },
+  {
+    "record_id": "SD-US3-002",
+    "user_role": "Portfolio Manager",
+    "portfolio_name": "Global Balanced Portfolio",
+    "metric_name": "Profit Margin",
+    "metric_value": "12.3%",
+    "metric_trend": "Stable",
+    "analysis_finding": "Profit margin remains consistent across the review period."
+  },
+  {
+    "record_id": "SD-US3-003",
+    "user_role": "Portfolio Manager",
+    "portfolio_name": "Fixed Income Portfolio",
+    "metric_name": "Expense Ratio",
+    "metric_value": "1.8%",
+    "metric_trend": "Increasing",
+    "analysis_finding": "Expense ratio has increased compared to the previous period."
+  },
+  {
+    "record_id": "SD-US3-004",
+    "user_role": "Portfolio Manager",
+    "portfolio_name": "Emerging Markets Portfolio",
+    "metric_name": "Return on Investment",
+    "metric_value": "6.7%",
+    "metric_trend": "Decreasing",
+    "analysis_finding": "Return on investment has declined during the current review period."
+  },
+  {
+    "record_id": "SD-US3-005",
+    "user_role": "Portfolio Manager",
+    "portfolio_name": "Multi-Asset Growth Portfolio",
+    "metric_name": "Cash Flow",
+    "metric_value": "£250,000",
+    "metric_trend": "Increasing",
+    "analysis_finding": "Cash flow position has strengthened during the review period."
+  }
+]

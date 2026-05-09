@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "de-demo"
+version = "0.1.0"
+description = "Minimal medallion SQLite → PostgreSQL demo pipeline"
+requires-python = ">=3.10"
+dependencies = [
+  "pandas>=2.0.0",
+  "sqlalchemy>=2.0.0",
+  "psycopg2-binary>=2.9.9",
+  "pyarrow>=14.0.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0.0"]
+
+[tool.setuptools.packages.find]
+include = ["de_demo*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

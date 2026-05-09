@@ -1,0 +1,20 @@
+Refined Business Problem Definition (Validated Version)
+
+Financial analysts, portfolio managers, and business stakeholders spend significant time manually collecting financial data, analysing metrics, preparing reports, and generating recommendations for decision-making. These activities are often performed across disconnected systems and spreadsheets, resulting in delays, inconsistencies, and reduced operational efficiency.
+
+The organisation requires an AI-powered Financial Analysis Copilot that assists users in generating financial reports, analysing key financial metrics, and providing data-driven recommendations in a faster and more consistent manner.
+
+The primary objective of the Financial Analysis Copilot is to:
+
+Reduce manual effort involved in financial analysis and reporting.
+Improve the speed and consistency of report generation.
+Support faster and more informed financial decision-making.
+
+The solution should support the following core functionalities:
+
+Generate financial reports using available financial data.
+Analyse financial metrics and identify significant patterns or trends.
+Provide recommendations based on analysed financial metrics and findings.
+Present outputs in a clear and understandable format for business users.
+
+The intended users of the system include financial analysts, portfolio managers, and business stakeholders involved in financial review and decision-making processes.

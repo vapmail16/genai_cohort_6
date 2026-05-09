@@ -1,0 +1,42 @@
+================================================================================
+ISSUE LOG — sdlc_with_llm (append-only)
+================================================================================
+
+ISSUE-001 | 2026-05-09
+What went wrong: `pip install -e ".[dev]"` in a shared user environment reported
+dependency conflicts (e.g. crewai vs installed openai/tokenizers versions).
+How to avoid: Use a dedicated virtualenv for this repo
+(`python -m venv .venv && source .venv/bin/activate`) before installing the
+backend package.
+
+ISSUE-002 | 2026-05-09
+What went wrong: `npm install` reported moderate severity advisories in the
+frontend dev dependency tree.
+How to avoid: Treat as acceptable for a local scaffold; run `npm audit` before
+locking production-like builds and upgrade Vite/Vitest when patches are available.
+
+ISSUE-003 | 2026-05-09
+What went wrong: Fixture path in `metrics_evaluation.py` uses
+`Path(__file__).resolve().parents[3]` and will break if files are moved under
+`backend/src`.
+How to avoid: Prefer a single data root via environment variable or package
+resources when the layout stabilises.
+
+ISSUE-004 | 2026-05-09
+What went wrong: A partially applied patch removed the `renderTable` function
+signature from `frontend/src/main.ts`, breaking `npm run build` (TS1128).
+How to avoid: When refactoring with patch tools, verify the edited region still
+starts with complete function/block headers; run `npm run build` locally after UI edits.
+
+================================================================================
+How to run (no DB; in-memory JSON fixtures)
+================================================================================
+Terminal 1 — API:
+  cd sdlc_with_llm/backend && python3 -m venv .venv && source .venv/bin/activate
+  pip install -e ".[dev]"
+  uvicorn app.main:app --reload --app-dir src --port 8000
+
+Terminal 2 — UI (proxies /api to :8000):
+  cd sdlc_with_llm/frontend && npm install && npm run dev
+
+Open http://localhost:5173 — select a metric row to load /api/metrics/{id}/evaluation.

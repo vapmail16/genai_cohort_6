@@ -1,0 +1,13 @@
+# Python virtual environments (never commit)
+.venv/
+venv/
+env/
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Local / IDE
+.DS_Store

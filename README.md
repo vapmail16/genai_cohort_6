@@ -1,6 +1,6 @@
 # genai_cohort_6
 
-Monorepo for Generative AI cohort exercises: a **data engineering medallion demo**, an **SDLC / LLM metrics** full-stack sample, and a **SaaS scaffolding** layout.
+Monorepo for Generative AI cohort exercises: medallion demo, SDLC metrics app, SaaS scaffolding, **Streamlit NN demo**, and **local Ollama** setup scripts.
 
 ---
 
@@ -11,6 +11,8 @@ Monorepo for Generative AI cohort exercises: a **data engineering medallion demo
 | [`data_engineering_demo/`](data_engineering_demo/) | SQLite → bronze/silver/gold (Pandas) → PostgreSQL warehouse, DQ, PII masking, CLI pipeline |
 | [`sdlc_with_llm/`](sdlc_with_llm/) | FastAPI backend + Vite/TypeScript frontend; metrics evaluation API (in-memory fixtures) |
 | [`saas_project_scaffolding/`](saas_project_scaffolding/) | Placeholder monorepo structure (see its [README](saas_project_scaffolding/README.md)) |
+| [`neural_network_example/`](neural_network_example/) | Streamlit slides: next-word prediction with neural nets (install `requirements.txt`, `streamlit run app.py`) |
+| [`offline_model_setup/`](offline_model_setup/) | Ollama local LLM helpers: `setup.sh`, `download_model.sh`, `test_connection.py`; see [`offline_model_setup/README.md`](offline_model_setup/README.md) |
 
 ---
 
@@ -19,6 +21,8 @@ Monorepo for Generative AI cohort exercises: a **data engineering medallion demo
 - **Python** 3.10+ (per-project virtualenvs recommended)
 - **Node.js** 18+ for `sdlc_with_llm/frontend`
 - **PostgreSQL** for the data pipeline warehouse load (or use `--skip-warehouse`)
+
+**Virtualenvs:** Create a `.venv` (or `venv`) in each project directory as needed. Those folders are **not** committed; the repo root [`.gitignore`](.gitignore) ignores them. Share dependencies via `requirements.txt` / `pyproject.toml` only.
 
 ---
 
@@ -87,6 +91,36 @@ npm install && npm run dev
 Open **http://localhost:5173** and use the metric UI to load `/api/metrics/{id}/evaluation`.
 
 See also [`sdlc_with_llm/ISSUE_LOG`](sdlc_with_llm/ISSUE_LOG).
+
+---
+
+## Neural network demo (`neural_network_example`)
+
+Slides in Streamlit (next-word prediction). Use a dedicated virtualenv:
+
+```bash
+cd neural_network_example
+python3 -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+---
+
+## Offline Ollama (`offline_model_setup`)
+
+Install Ollama, pull a small model (e.g. `llama3.2:3b`), verify the API:
+
+```bash
+cd offline_model_setup
+./setup.sh
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+python test_connection.py
+python -m unittest test_env_paths -v
+```
+
+Logs: [`offline_model_setup/ISSUE_LOG`](offline_model_setup/ISSUE_LOG).
 
 ---
 

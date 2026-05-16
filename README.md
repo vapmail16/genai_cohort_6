@@ -1,6 +1,6 @@
 # genai_cohort_6
 
-Monorepo for Generative AI cohort exercises: medallion demo, SDLC metrics app, SaaS scaffolding, **Streamlit NN demo**, and **local Ollama** setup scripts.
+Monorepo for Generative AI cohort exercises: medallion demo, SDLC metrics app, SaaS scaffolding, **Streamlit NN demo**, **LangChain + OpenAI** exercises, **OpenAI API smoke test**, and **local Ollama** setup scripts.
 
 ---
 
@@ -13,6 +13,8 @@ Monorepo for Generative AI cohort exercises: medallion demo, SDLC metrics app, S
 | [`saas_project_scaffolding/`](saas_project_scaffolding/) | Placeholder monorepo structure (see its [README](saas_project_scaffolding/README.md)) |
 | [`neural_network_example/`](neural_network_example/) | Streamlit slides: next-word prediction with neural nets (install `requirements.txt`, `streamlit run app.py`) |
 | [`offline_model_setup/`](offline_model_setup/) | Ollama local LLM helpers: `setup.sh`, `download_model.sh`, `test_connection.py`; see [`offline_model_setup/README.md`](offline_model_setup/README.md) |
+| [`langchain_openai/`](langchain_openai/) | Week 2 LangChain scripts (chains, memory, model switch, chatbot); see [`langchain_openai/README.md`](langchain_openai/README.md) |
+| [`openai_api_test/`](openai_api_test/) | Minimal script to verify `OPENAI_API_KEY` and API connectivity; see [`openai_api_test/README.md`](openai_api_test/README.md) |
 
 ---
 
@@ -121,6 +123,38 @@ python -m unittest test_env_paths -v
 ```
 
 Logs: [`offline_model_setup/ISSUE_LOG`](offline_model_setup/ISSUE_LOG).
+
+---
+
+## LangChain + OpenAI (`langchain_openai`)
+
+Progressive scripts: basic LCEL chain, memory, multi-provider switch (OpenAI / Anthropic / Ollama), interactive chatbot, sequential chain.
+
+```bash
+cd langchain_openai
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+# Copy .env.example to .env and set OPENAI_API_KEY (and optional ANTHROPIC_API_KEY).
+python 01_basic_chain.py
+```
+
+Full walkthrough: [`langchain_openai/README.md`](langchain_openai/README.md).
+
+---
+
+## OpenAI API test (`openai_api_test`)
+
+Quick connectivity check against the OpenAI API.
+
+```bash
+cd openai_api_test
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+python -m unittest test_env_paths -v
+python test_openai.py
+```
+
+Set `OPENAI_API_KEY` in repo root `.env`, `openai_api_test/.env` (e.g. copy [`.env.example`](.env.example)), or `capstone_project/backend/.env` if you use that layout. See [`openai_api_test/README.md`](openai_api_test/README.md).
 
 ---
 

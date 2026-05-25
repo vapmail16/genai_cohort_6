@@ -1,5 +1,6 @@
 # Secrets (never commit)
 .env
+**/.env
 
 # Python virtual environments (never commit)
 .venv/
@@ -7,6 +8,7 @@ venv/
 env/
 
 __pycache__/
+.pytest_cache/
 *.py[cod]
 *$py.class
 *.so

@@ -1,6 +1,6 @@
 # genai_cohort_6
 
-Monorepo for Generative AI cohort exercises: medallion demo, SDLC metrics app, SaaS scaffolding, **Streamlit NN demo**, **LangChain + OpenAI** exercises, **OpenAI API smoke test**, and **local Ollama** setup scripts.
+Monorepo for Generative AI cohort exercises: medallion demo, SDLC metrics app, SaaS scaffolding, **Streamlit NN demo**, **prompt engineering labs**, **LangChain + OpenAI** exercises, **vector database and RAG labs**, **OpenAI API smoke test**, and **local Ollama** setup scripts.
 
 ---
 
@@ -13,7 +13,10 @@ Monorepo for Generative AI cohort exercises: medallion demo, SDLC metrics app, S
 | [`saas_project_scaffolding/`](saas_project_scaffolding/) | Placeholder monorepo structure (see its [README](saas_project_scaffolding/README.md)) |
 | [`neural_network_example/`](neural_network_example/) | Streamlit slides: next-word prediction with neural nets (install `requirements.txt`, `streamlit run app.py`) |
 | [`offline_model_setup/`](offline_model_setup/) | Ollama local LLM helpers: `setup.sh`, `download_model.sh`, `test_connection.py`; see [`offline_model_setup/README.md`](offline_model_setup/README.md) |
+| [`prompt_engineering/`](prompt_engineering/) | Prompt techniques, injection, and token/temperature labs; see [`prompt_engineering/README.md`](prompt_engineering/README.md) |
 | [`langchain_openai/`](langchain_openai/) | Week 2 LangChain scripts (chains, memory, model switch, chatbot); see [`langchain_openai/README.md`](langchain_openai/README.md) |
+| [`vector_db_understanding/`](vector_db_understanding/) | Streamlit + Qdrant vector DB tutorial and PDF ingestion lab; see [`vector_db_understanding/README.md`](vector_db_understanding/README.md) |
+| [`rag_understanding/`](rag_understanding/) | Streamlit RAG tutorial with retrieval and answer-generation demos; see [`rag_understanding/README.md`](rag_understanding/README.md) |
 | [`openai_api_test/`](openai_api_test/) | Minimal script to verify `OPENAI_API_KEY` and API connectivity; see [`openai_api_test/README.md`](openai_api_test/README.md) |
 
 ---
@@ -139,6 +142,51 @@ python 01_basic_chain.py
 ```
 
 Full walkthrough: [`langchain_openai/README.md`](langchain_openai/README.md).
+
+---
+
+## Prompt engineering (`prompt_engineering`)
+
+Hands-on scripts for prompting basics, prompt injection, and token/temperature behavior.
+
+```bash
+cd prompt_engineering
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+python 01_prompt_techniques.py
+```
+
+Uses env values from repo root `.env` (or local `prompt_engineering/.env` if present).
+
+---
+
+## Vector DB understanding (`vector_db_understanding`)
+
+Interactive vector database tutorial plus PDF->Qdrant ingestion lab.
+
+```bash
+cd vector_db_understanding
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+streamlit run streamlit_app.py
+```
+
+Set `QDRANT_URL`, `QDRANT_API_KEY`, and optional `QDRANT_COLLECTION` in repo root `.env` (or local `vector_db_understanding/.env`).
+
+---
+
+## RAG understanding (`rag_understanding`)
+
+Interactive RAG concepts + live retrieval and generation demos.
+
+```bash
+cd rag_understanding
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+streamlit run streamlit_app.py
+```
+
+Set `OPENAI_API_KEY` and Qdrant vars in repo root `.env` (or local `rag_understanding/.env`).
 
 ---
 

@@ -15,6 +15,7 @@ Monorepo for Generative AI cohort exercises: medallion demo, SDLC metrics app, S
 | [`offline_model_setup/`](offline_model_setup/) | Ollama local LLM helpers: `setup.sh`, `download_model.sh`, `test_connection.py`; see [`offline_model_setup/README.md`](offline_model_setup/README.md) |
 | [`prompt_engineering/`](prompt_engineering/) | Prompt techniques, injection, and token/temperature labs; see [`prompt_engineering/README.md`](prompt_engineering/README.md) |
 | [`langchain_openai/`](langchain_openai/) | Week 2 LangChain scripts (chains, memory, model switch, chatbot); see [`langchain_openai/README.md`](langchain_openai/README.md) |
+| [`ai_agents/`](ai_agents/) | LangGraph training demos (basic graphs, messages, tools, ReACT, memory); see [`ai_agents/langgraph_training_guide.md`](ai_agents/langgraph_training_guide.md) |
 | [`vector_db_understanding/`](vector_db_understanding/) | Streamlit + Qdrant vector DB tutorial and PDF ingestion lab; see [`vector_db_understanding/README.md`](vector_db_understanding/README.md) |
 | [`rag_understanding/`](rag_understanding/) | Streamlit RAG tutorial with retrieval and answer-generation demos; see [`rag_understanding/README.md`](rag_understanding/README.md) |
 | [`openai_api_test/`](openai_api_test/) | Minimal script to verify `OPENAI_API_KEY` and API connectivity; see [`openai_api_test/README.md`](openai_api_test/README.md) |
@@ -142,6 +143,22 @@ python 01_basic_chain.py
 ```
 
 Full walkthrough: [`langchain_openai/README.md`](langchain_openai/README.md).
+
+---
+
+## AI agents (`ai_agents`)
+
+LangGraph-focused agent training demos and walkthrough (`01_basic_graph` through `06_real_world_project`).
+
+```bash
+cd ai_agents
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+python test_setup.py
+python demos/01_basic_graph/activity_selector.py
+```
+
+Set `OPENAI_API_KEY` in repo root `.env` (or local `ai_agents/.env`).
 
 ---
 

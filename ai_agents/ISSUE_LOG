@@ -1,0 +1,10 @@
+2026-06-02
+- Issue: Initial copy into `ai_agents/` missed `demos/` and `test_setup.py`, so the folder was incomplete.
+- Impact: Participants could not run the guided demos from the training doc.
+- Fix: Re-copied missing files from `genai_cohort_5/ai_agents`, verified with:
+  - `python3 demos/01_basic_graph/activity_selector.py`
+  - `set -a && source ../.env && set +a && python3 test_setup.py`
+- Prevention: After each folder copy, always run:
+  - `ls -la <folder>`
+  - `ls -la <folder>/demos`
+  - one smoke run from the folder's primary script

@@ -1,0 +1,19 @@
+================================================================================
+ISSUE LOG — ai_agents (append-only)
+================================================================================
+
+ISSUE-001 | 2026-06-06
+What went wrong: `activity_selector.py` Test 3 failed with `KeyError: None` because
+`decide_mood_node` only returned `"node_2"` when `random.random() < 0.5`; the
+`return "node_3"` line was indented inside the `if` block (unreachable), so the
+else path returned `None` and LangGraph could not resolve the conditional edge.
+How to avoid: After an `if`/`return`, place alternate branches at the same
+indentation level (`else:` or a dedented final `return`). Add unit tests that mock
+`random.choice()` to cover both routing outcomes.
+
+ISSUE-002 | 2026-06-06
+What went wrong: Demo looked like random routing was broken because 9 consecutive
+runs all picked surfing (~0.2% chance, but possible). The router worked; output
+did not show which branch was chosen, so streaks were mistaken for a bug.
+How to avoid: Print the random decision in `decide_mood_node` and prefer
+`random.choice([...])` so both paths and the selection are obvious in the demo.

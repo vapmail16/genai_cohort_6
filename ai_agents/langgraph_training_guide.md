@@ -218,9 +218,10 @@ def node_3(state):
 # Step 3: Create Decision Logic
 def decide_mood_node(state) -> Literal["node_2", "node_3"]:
     # Randomly choose between surfing or rock climbing
-    if random.random() < 0.5:
-        return "node_2"
-        return "node_3"
+    choice = random.choice(["node_2", "node_3"])
+    activity = "surfing 🏄" if choice == "node_2" else "rock climbing 🧗"
+    print(f"🎲 Random choice: {activity}")
+    return choice
 
 # Step 4: Build the Graph
 def create_activity_graph():

@@ -70,6 +70,7 @@ langgraph-prebuilt
 jupyter
 ipykernel
 langchain-openai
+numpy<2
 pandas
 pydantic
 pydantic_core

@@ -19,6 +19,7 @@ Monorepo for Generative AI cohort exercises: medallion demo, SDLC metrics app, S
 | [`vector_db_understanding/`](vector_db_understanding/) | Streamlit + Qdrant vector DB tutorial and PDF ingestion lab; see [`vector_db_understanding/README.md`](vector_db_understanding/README.md) |
 | [`rag_understanding/`](rag_understanding/) | Streamlit RAG tutorial with retrieval and answer-generation demos; see [`rag_understanding/README.md`](rag_understanding/README.md) |
 | [`openai_api_test/`](openai_api_test/) | Minimal script to verify `OPENAI_API_KEY` and API connectivity; see [`openai_api_test/README.md`](openai_api_test/README.md) |
+| [`oxford_capstone/`](oxford_capstone/) | IT Support Agent capstone + MCP session bundle (`capstone_project/`, `mcp/`); see [`oxford_capstone/README.md`](oxford_capstone/README.md) |
 
 ---
 
@@ -219,7 +220,47 @@ python -m unittest test_env_paths -v
 python test_openai.py
 ```
 
-Set `OPENAI_API_KEY` in repo root `.env`, `openai_api_test/.env` (e.g. copy [`.env.example`](.env.example)), or `capstone_project/backend/.env` if you use that layout. See [`openai_api_test/README.md`](openai_api_test/README.md).
+Set `OPENAI_API_KEY` in repo root `.env`, `openai_api_test/.env` (e.g. copy [`.env.example`](.env.example)), or `oxford_capstone/capstone_project/backend/.env` if you use that layout. See [`openai_api_test/README.md`](openai_api_test/README.md).
+
+---
+
+## Oxford bundle (`oxford_capstone`)
+
+Self-contained IT Support Agent capstone plus MCP teaching assets:
+
+| Subfolder | Purpose |
+|-----------|---------|
+| `oxford_capstone/capstone_project/` | FastAPI backend, React UI, Qdrant RAG, SQLite tickets, TypeScript MCP server |
+| `oxford_capstone/mcp/` | Architecture HTML, MCP dungeon demo, session PDF |
+
+```bash
+cd oxford_capstone/capstone_project
+python3 -m venv venv && source venv/bin/activate
+pip install -r backend/requirements.txt
+cp backend/.env.example backend/.env   # set OPENAI_API_KEY
+python -m backend.seed_demo_data --reset
+python -m backend.rag.ingest --reset
+
+# Terminal 1 — API
+python3 -m uvicorn backend.main:app --reload --port 8000
+
+# Terminal 2 — UI
+cd frontend && npm install && npm run dev   # http://localhost:5173
+
+# Terminal 3 — MCP server deps (Agentic MCP track)
+cd ../mcp_server && npm install
+
+# Tests
+pytest
+
+# Optional — architecture HTML (serve locally; see oxford_capstone/README.md)
+cd ../../mcp && python3 -m http.server 8765
+
+# Optional — MCP dungeon demo
+cd mcp-dungeon && npm install && npm start   # http://localhost:3333
+```
+
+See [`oxford_capstone/README.md`](oxford_capstone/README.md) and [`oxford_capstone/capstone_project/docs/README.md`](oxford_capstone/capstone_project/docs/README.md).
 
 ---
 

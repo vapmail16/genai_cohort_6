@@ -1,0 +1,10 @@
+================================================================================
+ISSUE LOG — langsmith (append-only)
+================================================================================
+
+ISSUE-001 | 2026-06-20
+What went wrong: Fresh copy from cohort_5 failed `pip install` because
+`langsmith==0.2.5` is not published on PyPI; requirements also listed bogus
+`asyncio==3.4.3`, unused `sqlite3-api`, and missing `langchain-community`.
+How to avoid: Pin `langsmith>=0.2.11`, add `langchain-community`, drop stdlib
+fake packages, and run `test_setup.py` after install.

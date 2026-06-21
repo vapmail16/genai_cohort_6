@@ -1,0 +1,128 @@
+{
+  "metrics": [
+    {
+      "chain_name": "qa",
+      "model": "gpt-3.5-turbo",
+      "timestamp": "2026-06-21T09:28:27.539138",
+      "inputs": {
+        "question": "What are the benefits of using LangSmith for LLM monitoring?"
+      },
+      "success": true,
+      "output": "Some benefits of using LangSmith for LLM monitoring include real-time monitoring and alerts, customizable reporting, streamlined compliance processes, and improved visibility and control over LLM activities.",
+      "execution_time_seconds": 2.751,
+      "total_tokens": 62,
+      "prompt_tokens": 28,
+      "completion_tokens": 34,
+      "total_cost_usd": 6.5e-05,
+      "error": null
+    },
+    {
+      "chain_name": "summary",
+      "model": "gpt-3.5-turbo",
+      "timestamp": "2026-06-21T09:28:30.290349",
+      "inputs": {
+        "text": "LangSmith is a platform for building production-grade LLM applications.\n                    It lets you debug, test, evaluate, and monitor chains and intelligent agents built\n                    on any LLM framework and seamlessly integrates with LangChain, the go-to open source\n                    framework for building with LLMs. LangSmith is developed by LangChain, the company\n                    behind the open source LangChain framework."
+      },
+      "success": true,
+      "output": "- LangSmith is a platform for building production-grade LLM applications\n- It allows users to debug, test, evaluate, and monitor chains and intelligent agents built on any LLM framework\n- LangSmith seamlessly integrates with LangChain, an open source framework for building with LLMs, developed by the same company.",
+      "execution_time_seconds": 1.347,
+      "total_tokens": 162,
+      "prompt_tokens": 98,
+      "completion_tokens": 64,
+      "total_cost_usd": 0.000145,
+      "error": null
+    },
+    {
+      "chain_name": "code_gen",
+      "model": "gpt-4",
+      "timestamp": "2026-06-21T09:28:31.637076",
+      "inputs": {
+        "task": "calculates the factorial of a number recursively"
+      },
+      "success": true,
+      "output": "Here is a Python function that calculates the factorial of a number using recursion:\n\n```python\ndef factorial(n: int) -> int:\n    \"\"\"\n    Returns the factorial of a number.\n\n    Parameters:\n    n (int): The number to calculate the factorial of.\n\n    Returns:\n    int: The factorial of the number.\n    \"\"\"\n\n    if n == 0 or n == 1:\n        return 1\n    else:\n        return n * factorial(n - 1)\n```\n\nThe function takes an integer `n` as input. If `n` is 0 or 1, it returns 1 (since the factorial of 0 and 1 is 1). Otherwise, it multiplies `n` with the factorial of `n-1` (calculated recursively) and returns the result.",
+      "execution_time_seconds": 6.468,
+      "total_tokens": 193,
+      "prompt_tokens": 27,
+      "completion_tokens": 166,
+      "total_cost_usd": 0.01077,
+      "error": null
+    },
+    {
+      "chain_name": "translation",
+      "model": "gpt-3.5-turbo",
+      "timestamp": "2026-06-21T09:28:38.105582",
+      "inputs": {
+        "text": "LangSmith helps developers build better LLM applications.",
+        "target_language": "Spanish"
+      },
+      "success": true,
+      "output": "LangSmith ayuda a los desarrolladores a construir mejores aplicaciones de LLM.",
+      "execution_time_seconds": 1.986,
+      "total_tokens": 41,
+      "prompt_tokens": 24,
+      "completion_tokens": 17,
+      "total_cost_usd": 3.8e-05,
+      "error": null
+    },
+    {
+      "chain_name": "error_test",
+      "model": "gpt-3.5-turbo",
+      "timestamp": "2026-06-21T09:28:40.112015",
+      "inputs": {
+        "input": "This should fail"
+      },
+      "success": false,
+      "output": null,
+      "execution_time_seconds": 0.361,
+      "total_tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_cost_usd": 0,
+      "error": "Error code: 401 - {'error': {'message': 'Incorrect API key provided: invalid-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}"
+    }
+  ],
+  "report": {
+    "summary": {
+      "total_runs": 5,
+      "successful_runs": 4,
+      "failed_runs": 1,
+      "success_rate": 80.0
+    },
+    "token_usage": {
+      "total_tokens": 458,
+      "total_prompt_tokens": 177,
+      "total_completion_tokens": 281,
+      "avg_tokens_per_run": 114.5
+    },
+    "cost_analysis": {
+      "total_cost_usd": 0.011,
+      "avg_cost_per_run": 0.002755,
+      "cost_by_model": {
+        "gpt-3.5-turbo": {
+          "total_cost": 0.000248,
+          "run_count": 3,
+          "avg_cost": 8.3e-05
+        },
+        "gpt-4": {
+          "total_cost": 0.01077,
+          "run_count": 1,
+          "avg_cost": 0.01077
+        }
+      }
+    },
+    "performance": {
+      "total_execution_time": 12.91,
+      "avg_execution_time": 2.583,
+      "fastest_run": 0.361,
+      "slowest_run": 6.468
+    },
+    "errors": [
+      {
+        "chain": "error_test",
+        "error": "Error code: 401 - {'error': {'message': 'Incorrect API key provided: invalid-key. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}",
+        "timestamp": "2026-06-21T09:28:40.112015"
+      }
+    ]
+  }
+}

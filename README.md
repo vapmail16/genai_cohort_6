@@ -20,6 +20,7 @@ Monorepo for Generative AI cohort exercises: medallion demo, SDLC metrics app, S
 | [`rag_understanding/`](rag_understanding/) | Streamlit RAG tutorial with retrieval and answer-generation demos; see [`rag_understanding/README.md`](rag_understanding/README.md) |
 | [`openai_api_test/`](openai_api_test/) | Minimal script to verify `OPENAI_API_KEY` and API connectivity; see [`openai_api_test/README.md`](openai_api_test/README.md) |
 | [`oxford_capstone/`](oxford_capstone/) | IT Support Agent capstone + MCP session bundle (`capstone_project/`, `mcp/`); see [`oxford_capstone/README.md`](oxford_capstone/README.md) |
+| [`langsmith/`](langsmith/) | LangSmith metrics demo (token/cost/error tracking + Streamlit dashboard); see [`langsmith/README.md`](langsmith/README.md) |
 
 ---
 
@@ -261,6 +262,24 @@ cd mcp-dungeon && npm install && npm start   # http://localhost:3333
 ```
 
 See [`oxford_capstone/README.md`](oxford_capstone/README.md) and [`oxford_capstone/capstone_project/docs/README.md`](oxford_capstone/capstone_project/docs/README.md).
+
+---
+
+## LangSmith (`langsmith`)
+
+LangSmith metrics demo: track tokens, cost, latency, and errors; visualize results in Streamlit.
+
+```bash
+cd langsmith
+python3 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env   # OPENAI_API_KEY + LANGSMITH_API_KEY
+python test_setup.py
+python langsmith_demo.py
+streamlit run metrics_dashboard.py   # http://localhost:8501
+```
+
+See [`langsmith/README.md`](langsmith/README.md).
 
 ---
 

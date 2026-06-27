@@ -21,13 +21,15 @@ Monorepo for Generative AI cohort exercises: medallion demo, SDLC metrics app, S
 | [`openai_api_test/`](openai_api_test/) | Minimal script to verify `OPENAI_API_KEY` and API connectivity; see [`openai_api_test/README.md`](openai_api_test/README.md) |
 | [`oxford_capstone/`](oxford_capstone/) | IT Support Agent capstone + MCP session bundle (`capstone_project/`, `mcp/`); see [`oxford_capstone/README.md`](oxford_capstone/README.md) |
 | [`langsmith/`](langsmith/) | LangSmith metrics demo (token/cost/error tracking + Streamlit dashboard); see [`langsmith/README.md`](langsmith/README.md) |
+| [`MiroFish/`](MiroFish/) | Swarm intelligence simulation engine (Vue + Flask + Zep); see [`MiroFish/README.md`](MiroFish/README.md) |
+| [`openclaw/`](openclaw/) | OpenClaw personal AI assistant (gateway + channels); upstream clone — see section below |
 
 ---
 
 ## Prerequisites
 
 - **Python** 3.10+ (per-project virtualenvs recommended)
-- **Node.js** 18+ for `sdlc_with_llm/frontend`
+- **Node.js** 22+ (24 recommended) for `openclaw/`; **Node.js** 18+ for `sdlc_with_llm/frontend`
 - **PostgreSQL** for the data pipeline warehouse load (or use `--skip-warehouse`)
 
 **Virtualenvs:** Create a `.venv` (or `venv`) in each project directory as needed. Those folders are **not** committed; the repo root [`.gitignore`](.gitignore) ignores them. Share dependencies via `requirements.txt` / `pyproject.toml` only.
@@ -280,6 +282,66 @@ streamlit run metrics_dashboard.py   # http://localhost:8501
 ```
 
 See [`langsmith/README.md`](langsmith/README.md).
+
+---
+
+## MiroFish (`MiroFish`)
+
+Swarm intelligence prediction engine: upload seed documents, build a knowledge graph, run multi-agent social simulations, generate reports.
+
+**Prerequisites:** Node.js 18+, Python 3.11–3.12, [uv](https://docs.astral.sh/uv/), `LLM_API_KEY` + `ZEP_API_KEY` in `.env`.
+
+```bash
+cd MiroFish
+cp .env.example .env          # LLM + Zep keys (or copy from cohort_5)
+npm run setup:all             # root + frontend npm + backend uv sync
+npm run dev                   # frontend :3000, backend :5001
+```
+
+**Intel Mac (x86_64):** `backend/pyproject.toml` pins `torch==2.2.2` via uv override (torch 2.9+ has no Intel Mac wheels). Use Docker if local sync still fails: `docker compose up -d`.
+
+**Verify:** `cd backend && uv run pytest tests/ -q` and open `http://localhost:5001/health`.
+
+Full guide: [`MiroFish/README.md`](MiroFish/README.md).
+
+---
+
+## OpenClaw (`openclaw/`)
+
+Local-first personal AI assistant with a multi-channel gateway (WhatsApp, Telegram, Slack, Discord, and more). This folder is a **shallow clone** of [github.com/openclaw/openclaw](https://github.com/openclaw/openclaw); config lives in `~/.openclaw/`, not in the repo.
+
+**Prerequisites:** Node.js 22.19+ (or 24), [pnpm](https://pnpm.io/) (`npm install -g pnpm` if `corepack` is unavailable).
+
+```bash
+# First time (from repo root)
+git clone --depth 1 https://github.com/openclaw/openclaw.git openclaw
+cd openclaw
+pnpm install
+pnpm openclaw setup          # creates ~/.openclaw workspace + config
+pnpm build                   # dist/ + control UI (also runs ui:build)
+```
+
+**Configure models** (interactive wizard, or reuse keys from another cohort project):
+
+```bash
+export OPENAI_API_KEY=...    # or: pnpm openclaw configure --section model
+pnpm openclaw onboard        # optional guided setup + daemon install
+```
+
+**Run:**
+
+```bash
+pnpm openclaw gateway --port 18789 --verbose   # Control UI at http://127.0.0.1:18789/
+# Dev loop: pnpm gateway:watch
+pnpm openclaw doctor
+pnpm openclaw agent --message "Hello"
+```
+
+**Verify checkout:** `./test_setup.sh`
+
+**Architecture:** [`openclaw/ARCHITECTURE.md`](openclaw/ARCHITECTURE.md) (cohort overview; upstream detail in `openclaw/docs/concepts/architecture.md`).
+
+Cohort notes: [`openclaw/ISSUE_LOG`](openclaw/ISSUE_LOG). Upstream docs: [docs.openclaw.ai](https://docs.openclaw.ai).
 
 ---
 

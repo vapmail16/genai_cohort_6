@@ -1,0 +1,28 @@
+================================================================================
+ISSUE LOG — MiroFish (append-only)
+================================================================================
+
+ISSUE-001 | 2026-06-21
+What went wrong: `uv sync` failed on Intel macOS (`x86_64`) because transitive
+`torch==2.9.1` has no macOS x86_64 wheels (arm64/Linux/Windows only).
+How to avoid: Pin `[tool.uv] override-dependencies = ["torch==2.2.2"]` in
+`backend/pyproject.toml` for local Intel Mac dev, or use Docker (`docker compose up`).
+
+ISSUE-002 | 2026-06-27
+What went wrong: Frontend showed Axios `Network Error` and
+`ERR_CONNECTION_REFUSED` on `:5001/api/graph/ontology/generate` — the Flask
+backend was not running (only a stale browser tab on an old Vite port, e.g. 3001).
+vue-i18n "Not found parent scope" and Grammarly console warnings are harmless noise.
+How to avoid: Start both services from `MiroFish/` with `npm run dev` and keep
+that terminal open. Use the URL Vite prints (usually http://localhost:3000/). If
+3000 is busy, Vite may use 3001 — backend is always http://127.0.0.1:5001.
+Verify: `curl http://127.0.0.1:5001/health` returns `"status": "ok"`.
+
+ISSUE-003 | 2026-06-27
+What went wrong: Frontend axios used `baseURL: http://localhost:5001` while the
+user had a stale Vite tab (e.g. :3001) or backend briefly down during Flask
+debug reload → `ERR_CONNECTION_REFUSED`. `npm run dev` used
+`concurrently --kill-others`, so a Vite restart could kill the backend too.
+How to avoid: Frontend now defaults to same-origin `/api` (Vite proxy). Dev
+script no longer uses `--kill-others`. Always open the URL Vite prints
+(usually http://localhost:3000/), hard-refresh, and keep `npm run dev` running.

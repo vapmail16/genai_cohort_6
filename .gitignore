@@ -22,3 +22,6 @@ __pycache__/
 **/support_agent.db
 node_modules/
 **/dist/
+
+# Local upstream clone (see README — do not commit full openclaw repo)
+openclaw/
